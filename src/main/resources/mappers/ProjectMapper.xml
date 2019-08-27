@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.vip.items.mapper.ProjectMapper">
-    <resultMap id="projest_result" type="Project">
-        <id property="proid" column="proid"></id>
-        <result property="proName" column="pro_name"></result>
-        <result property="proCom" column="pro_com"></result>
-        <result property="money" column="money"></result>
-        <result property="proRequest" column="pro_request"></result>
-        <result property="proLocation" column="pro_location"></result>
-        <result property="tel" column="tel"></result>
-        <result property="time" column="time"></result>
-    </resultMap>
-    <sql id="project_datail">
-    proid,pro_name,pro_com,money,
-    pro_request,pro_location,tel,time
-    </sql>
-  <select id="findByproId" resultMap="projest_result">
+  <resultMap id="base_project" type="Project">
+    <!--@mbg.generated-->
+    <id column="proid"  property="proid" />
+    <result column="pro_name" property="proName" />
+    <result column="create_time" property="createTime" />
+    <result column="pro_com" property="proCom" />
+    <result column="pro_request" property="proRequest" />
+    <result column="tel" property="tel" />
+    <result column="time" property="time" />
+    <result column="cate_id" property="cateId" />
+    <result column="menu2_id" property="menu2Id" />
+    <result column="menu3_id" property="menu3Id" />
+    <result column="is_delete" property="isDelete" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    proid, pro_name, create_time, pro_com, pro_request, tel, `time`, cate_id, menu2_id, 
+    menu3_id, is_delete
+  </sql>
+  <select id="findByproId" resultMap="base_project">
     select
-      <include refid="project_datail" />
-    from project
-    where proid = #{proId}  and is_delete = 0
-  </select>
+    <include refid="Base_Column_List" />
+    from project p
+    where
+    p.proid = #{proId}
+    </select>
 </mapper>

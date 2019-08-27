@@ -62,7 +62,7 @@ public class Programmer {
     /**
     * 二级分类id
     */
-    private Integer menu2Id;
+
 
     /**
     * 三级分类id

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.vip.items.mapper.ProgrammerMapper">
-  <resultMap id="BaseResultMap" type="com.vip.items.domain.entity.Programmer">
+  <resultMap id="base_programmer" type="Programmer">
 
     <id column="pid" property="pid" />
     <result column="pname" property="pname" />
@@ -11,18 +11,17 @@
     <result column="moods" property="moods" />
     <result column="income" property="income" />
     <result column="grade" property="grade" />
-    <result column="p_location" property="pLocation" />
+    <result column="location" property="pLocation" />
     <result column="introduce" property="introduce" />
     <result column="cate_id" property="cateId" />
-    <result column="menu2_id" property="menu2Id" />
     <result column="menu3_id" property="menu3Id" />
     <result column="is_delete" property="isDelete" />
   </resultMap>
   <sql id="Base_Column_List">
-    pid, pname, pimage, adept, finish, moods, income, grade, p_location, introduce, cate_id, 
-    menu2_id, menu3_id, is_delete
+    pid, pname, pimage, adept, finish, moods, income, grade, location, introduce, cate_id,
+    menu3_id, is_delete
   </sql>
-  <select id="findBypid"  resultMap="BaseResultMap">
+  <select id="findBypid"  resultMap="base_programmer">
     select 
     <include refid="Base_Column_List" />
     from programmer

@@ -16,11 +16,6 @@ public class Project {
     private String proName;
 
     /**
-    * 预算
-    */
-    private String money;
-
-    /**
     * 创建时间
     */
     private Date createTime;
@@ -34,11 +29,6 @@ public class Project {
     * 项目要求
     */
     private String proRequest;
-
-    /**
-    * 项目运行的地点
-    */
-    private String proLocation;
 
     /**
     * 联系电话
