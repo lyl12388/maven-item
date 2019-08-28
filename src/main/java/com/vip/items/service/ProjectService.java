@@ -1,7 +1,8 @@
 package com.vip.items.service;
 
-import com.vip.items.utils.ProjectBean;
+import com.vip.items.domain.vo.ProjectVo;
+
 
 public interface ProjectService {
-    ProjectBean getDetail(int proId);
+    ProjectVo getDetail(int proId);
 }

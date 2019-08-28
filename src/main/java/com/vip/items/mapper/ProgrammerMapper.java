@@ -1,8 +1,8 @@
 package com.vip.items.mapper;
 
-import com.vip.items.domain.entity.Programmer;
+import com.vip.items.domain.vo.ProgrammerVo;
 
 public interface ProgrammerMapper {
 
-    Programmer findBypid(int pid);
+    ProgrammerVo findBypid(int pid);
 }

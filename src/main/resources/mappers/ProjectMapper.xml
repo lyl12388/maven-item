@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.vip.items.mapper.ProjectMapper">
-  <resultMap id="base_project" type="Project">
+  <resultMap id="base_project" type="com.vip.items.domain.vo.ProjectVo">
     <!--@mbg.generated-->
     <id column="proid"  property="proid" />
     <result column="pro_name" property="proName" />
@@ -14,17 +14,29 @@
     <result column="menu2_id" property="menu2Id" />
     <result column="menu3_id" property="menu3Id" />
     <result column="is_delete" property="isDelete" />
+    <collection property="category" ofType="Category">
+      <id property="cateId" column="cate_id"/>
+      <result property="cateName" column="cate_name"/>
+    </collection>
+    <collection property="subMenu2" ofType="SubMenu2">
+      <id property="menu2Id" column="menu2_id"/>
+      <result property="menu2Name" column="menu2_name"/>
+    </collection>
+    <collection property="subMenu3" ofType="SubMenu3">
+      <id property="menu3Id" column="menu3_id"/>
+      <result property="menu3Name" column="menu3_name"/>
+    </collection>
   </resultMap>
   <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    proid, pro_name, create_time, pro_com, pro_request, tel, `time`, cate_id, menu2_id, 
-    menu3_id, is_delete
+    p.proid, pro_name, create_time, pro_com, pro_request, tel, `time`, p.cate_id,cate_name,p.menu2_id,menu2_name,
+    p.menu3_id, menu3_name,p.is_delete
   </sql>
   <select id="findByproId" resultMap="base_project">
     select
     <include refid="Base_Column_List" />
-    from project p
-    where
-    p.proid = #{proId}
+    from project p left join category c on p.cate_id = c.cate_id
+                   left join sub_menu2 sm2 on p.menu2_id = sm2.menu2_id
+                   left join sub_menu3 sm3 on p.menu3_id = sm3.menu3_id
+    where p.proid = #{proId} and p.is_delete = 0
     </select>
 </mapper>

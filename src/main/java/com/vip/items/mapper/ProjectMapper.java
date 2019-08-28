@@ -1,7 +1,7 @@
 package com.vip.items.mapper;
 
-import com.vip.items.domain.entity.Project;
+import com.vip.items.domain.vo.ProjectVo;
 
 public interface ProjectMapper {
-    Project findByproId(int proId);
+    ProjectVo findByproId(int proId);
 }

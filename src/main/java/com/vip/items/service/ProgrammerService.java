@@ -1,8 +1,8 @@
 package com.vip.items.service;
 
 
-import com.vip.items.utils.ProgrammerBean;
+import com.vip.items.domain.vo.ProgrammerVo;
 
 public interface ProgrammerService {
-    ProgrammerBean getDetail(int pid);
+    ProgrammerVo getDetail(int pid);
 }

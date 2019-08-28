@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.vip.items.mapper.ProgrammerMapper">
-  <resultMap id="base_programmer" type="Programmer">
+  <resultMap id="base_programmer" type="com.vip.items.domain.vo.ProgrammerVo">
 
     <id column="pid" property="pid" />
     <result column="pname" property="pname" />
@@ -16,16 +16,33 @@
     <result column="cate_id" property="cateId" />
     <result column="menu3_id" property="menu3Id" />
     <result column="is_delete" property="isDelete" />
+    <collection property="category" ofType="Category">
+      <id property="cateId" column="cate_id"/>
+      <result property="cateName" column="cate_name"/>
+    </collection>
+    <collection property="subMenu3" ofType="SubMenu3">
+      <id property="menu3Id" column="menu3_id"/>
+      <result property="menu3Name" column="menu3_name"/>
+    </collection>
+    <collection property="grades" ofType="Grades">
+      <id property="gradesId" column="grades_id"/>
+      <result property="grade1" column="grade1"/>
+      <result property="grade2" column="grade2"/>
+      <result property="grade3" column="grade3"/>
+      <result property="grade4" column="grade4"/>
+    </collection>
   </resultMap>
   <sql id="Base_Column_List">
-    pid, pname, pimage, adept, finish, moods, income, grade, location, introduce, cate_id,
-    menu3_id, is_delete
+    p.pid, pname, pimage, adept, finish, moods, income, grade, location, introduce,
+    is_delete,p.cate_id,cate_name,p.menu3_id,menu3_name,grades_id,grade1,grade2,grade3,grade4
   </sql>
   <select id="findBypid"  resultMap="base_programmer">
     select 
     <include refid="Base_Column_List" />
-    from programmer
-    where pid = #{pid} and is_delete = 0
+    from programmer p left join category c2 on p.cate_id = c2.cate_id
+                      left join sub_menu3 sm3 on p.menu3_id = sm3.menu3_id
+                      left join grades g on p.pid = g.pid
+    where p.pid = #{pid} and p.is_delete = 0
   </select>
 
 </mapper>
