@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.vip.items.mapper.ProgrammerMapper">
   <resultMap id="base_programmer" type="com.vip.items.domain.vo.ProgrammerVo">
-
     <id column="pid" property="pid" />
     <result column="pname" property="pname" />
     <result column="pimage" property="pimage" />
@@ -11,26 +10,26 @@
     <result column="moods" property="moods" />
     <result column="income" property="income" />
     <result column="grade" property="grade" />
-    <result column="location" property="pLocation" />
+    <result column="location" property="location" />
     <result column="introduce" property="introduce" />
     <result column="cate_id" property="cateId" />
     <result column="menu3_id" property="menu3Id" />
     <result column="is_delete" property="isDelete" />
-    <collection property="category" ofType="Category">
+    <association property="category" javaType="Category">
       <id property="cateId" column="cate_id"/>
       <result property="cateName" column="cate_name"/>
-    </collection>
-    <collection property="subMenu3" ofType="SubMenu3">
+    </association>
+    <association property="subMenu3" javaType="SubMenu3">
       <id property="menu3Id" column="menu3_id"/>
       <result property="menu3Name" column="menu3_name"/>
-    </collection>
-    <collection property="grades" ofType="Grades">
+    </association>
+    <association property="grades" javaType="Grades">
       <id property="gradesId" column="grades_id"/>
       <result property="grade1" column="grade1"/>
       <result property="grade2" column="grade2"/>
       <result property="grade3" column="grade3"/>
       <result property="grade4" column="grade4"/>
-    </collection>
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
     p.pid, pname, pimage, adept, finish, moods, income, grade, location, introduce,

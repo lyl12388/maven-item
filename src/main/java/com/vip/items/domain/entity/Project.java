@@ -1,6 +1,8 @@
 package com.vip.items.domain.entity;
 
 import java.util.Date;
+
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 
 @Data
@@ -18,6 +20,7 @@ public class Project {
     /**
     * 创建时间
     */
+    @JSONField(format = "yyyy-MM-dd")
     private Date createTime;
 
     /**

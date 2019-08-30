@@ -47,7 +47,7 @@ public class Programmer {
     /**
     * 能够做项目的地点
     */
-    private String pLocation;
+    private String location;
 
     /**
     * 简介

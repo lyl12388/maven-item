@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vip.items.mapper.Collection1Mapper">
+
+  <insert id="saveCollection1">
+    insert into collection1(uid, proid) values (#{param1},#{param2})
+  </insert>
+  <select id="findBycid" resultType="com.vip.items.domain.entity.Collection1">
+    select *
+    from collection1 c
+    where c.uid = #{param1} and c.proid = #{param2} and c.is_delete = 0
+  </select>
+    <update id="updateCollection1">
+       update  collection1  c set c.is_delete = 1
+      where c.uid = #{param1} and c.proid = #{param2}
+    </update>
+</mapper>

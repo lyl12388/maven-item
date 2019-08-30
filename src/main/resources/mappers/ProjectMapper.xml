@@ -14,18 +14,18 @@
     <result column="menu2_id" property="menu2Id" />
     <result column="menu3_id" property="menu3Id" />
     <result column="is_delete" property="isDelete" />
-    <collection property="category" ofType="Category">
+    <association property="category" javaType="Category">
       <id property="cateId" column="cate_id"/>
       <result property="cateName" column="cate_name"/>
-    </collection>
-    <collection property="subMenu2" ofType="SubMenu2">
+    </association>
+    <association property="subMenu2" javaType="SubMenu2">
       <id property="menu2Id" column="menu2_id"/>
       <result property="menu2Name" column="menu2_name"/>
-    </collection>
-    <collection property="subMenu3" ofType="SubMenu3">
+    </association>
+    <association property="subMenu3" javaType="SubMenu3">
       <id property="menu3Id" column="menu3_id"/>
       <result property="menu3Name" column="menu3_name"/>
-    </collection>
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
     p.proid, pro_name, create_time, pro_com, pro_request, tel, `time`, p.cate_id,cate_name,p.menu2_id,menu2_name,
@@ -39,4 +39,23 @@
                    left join sub_menu3 sm3 on p.menu3_id = sm3.menu3_id
     where p.proid = #{proId} and p.is_delete = 0
     </select>
+
+    <select id="findByKeyword" resultMap="base_project">
+        select p.proid,p.pro_name,p.create_time,p.pro_com,p.pro_request,p.tel,p.time,
+        c2.cate_id,c2.cate_name,
+        sm2.menu2_id,sm2.menu2_name,
+        sm3.menu3_id,sm3.menu3_name
+        from project p
+        left join category c2 on p.cate_id = c2.cate_id
+        left join sub_menu2 sm2 on p.menu2_id = sm2.menu2_id
+        left join sub_menu3 sm3 on p.menu3_id = sm3.menu3_id
+        where p.pro_name like concat(concat('%',#{keyword}),'%')
+        or p.pro_request like concat(concat('%',#{keyword}),'%')
+    </select>
+
+  <insert id="saveProject">
+    insert into project(pro_name,pro_com,pro_request,tel,time,cate_id,menu2_id,menu3_id)
+      values (#{param1},#{param2},#{param3},
+      #{param4},#{param5},#{param6},#{param7},#{param8})
+  </insert>
 </mapper>
